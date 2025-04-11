@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @IdClass(MyEntityId.class) // Reference the composite key class
-@Table(name = "my_entity", schema = "tempschema")
+@Table(name = "my_entity", schema = "labschema")
 public class MyEntity {
     
     @Id
