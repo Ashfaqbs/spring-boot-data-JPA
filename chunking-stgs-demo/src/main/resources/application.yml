@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    # NOTE: enable server-side batching in the PostgreSQL driver
+    # Adding reWriteBatchedInserts=true lets the driver collapse many INSERTs into fewer round-trips.
+    url: jdbc:postgresql://localhost:9991/mainschema?reWriteBatchedInserts=true
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+    properties:
+      # ---- Hibernate JDBC batching ----
+      # Batch size of 1000 is a good starting point (tune 500–2000 based on your DB).
+      hibernate.jdbc.batch_size: 1000
+
+      # Order INSERTs/UPDATEs to maximize batchability.
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+
+      # Optional: allow batching for versioned entities
+      hibernate.jdbc.batch_versioned_data: true
+
+      # Optional: keep Hibernate quiet
+      hibernate.generate_statistics: false
